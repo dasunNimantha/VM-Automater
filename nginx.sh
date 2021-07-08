@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Configuring Nginx Server"
 sudo apt install nginx apache2-utils -y
 sudo systemctl enable nginx
