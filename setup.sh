@@ -97,3 +97,17 @@ while true; do
      *) echo "Please answer y or n." ;;
      esac
 done
+
+while true; do
+     printf "\n"
+     read -r -p "Do you want to install Pi-Hole (Network wide ad-blocker) ? (Y/N) : " isDocker
+     case $isDocker in
+     [Yy]*)
+          chmod +x pi-hole.sh
+          ./pi-hole.sh
+          break
+          ;;
+     [Nn]*) break ;;
+     *) echo "Please answer y or n." ;;
+     esac
+done

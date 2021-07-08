@@ -6,10 +6,12 @@
 
 # This script will only allow to clouflare ips to a http/https request and block all other requests
 
-for i in $(curl https://www.cloudflare.com/ips-v4); do iptables -I INPUT -p tcp -m multiport --dports http,https -s "$i" -j ACCEPT; done
-for i in $(curl https://www.cloudflare.com/ips-v6); do ip6tables -I INPUT -p tcp -m multiport --dports http,https -s "$i" -j ACCEPT; done
+printf "########## Warning !!! You need to have a cloudflare A record point to this server.Otherwise the webserver would't be accessible. ##########"
+
+for i in $(curl https://www.cloudflare.com/ips-v4); do sudo iptables -I INPUT -p tcp -m multiport --dports http,https -s "$i" -j ACCEPT; done
+for i in $(curl https://www.cloudflare.com/ips-v6); do sudo ip6tables -I INPUT -p tcp -m multiport --dports http,https -s "$i" -j ACCEPT; done
 
 # Avoid racking up billing/attacks
 
-iptables -A INPUT -p tcp -m multiport --dports http,https -j DROP
-ip6tables -A INPUT -p tcp -m multiport --dports http,https -j DROP
+sudo iptables -A INPUT -p tcp -m multiport --dports http,https -j DROP
+sudo ip6tables -A INPUT -p tcp -m multiport --dports http,https -j DROP

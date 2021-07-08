@@ -5,10 +5,17 @@ sudo cp configs/ssh/sshd_config /etc/ssh/sshd_config
 
 ## change default ssh port
 read -r -p "Enter a custom SSH Port (1025-30000) : " SSHPORT
+
+while [[ "$SSHPORT" =~ [^0-9] || -z "$SSHPORT" ]]; do
+    read -r -p "Invalid Port Number.Try Again :  " SSHPORT
+    #loop until the user enters only numeric characters.
+done
+
 sudo sed -i "s/#Port 22/Port $SSHPORT/" /etc/ssh/sshd_config
 printf "\n"
 echo "######## SSH Port changed to $SSHPORT successfully.Allow this port in your firewall ########"
 printf "\n"
+
 ## add pulic key and disable password authentication
 
 while true; do
