@@ -1,5 +1,11 @@
 #!/bin/bash
 
+printf "\n"
+echo "#####################################"
+echo "######## SSH CONFIGURATIONS  ########"
+echo "#####################################"
+printf "\n"
+
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 sudo cp configs/ssh/sshd_config /etc/ssh/sshd_config
 
