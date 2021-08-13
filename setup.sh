@@ -19,6 +19,9 @@ get_distribution() {
 ############# MAIN CODE   ##############
 ########################################
 
+# set time zone
+sudo dpkg-reconfigure tzdata
+
 sudo apt update -y
 sudo apt upgrade -y
 
@@ -44,13 +47,6 @@ while true; do
      esac
 done
 
-
-printf "\n"
-echo "#####################################"
-echo "########## FAIL2BAN SETUP  ##########"
-echo "#####################################"
-printf "\n"
-
 chmod +x fail2ban.sh
 ./fail2ban.sh
 
@@ -59,7 +55,7 @@ while true; do
      read -r -p "Do you want to install CyberPannel ? (Y/N) : " isCyberPannel
      case $isCyberPannel in
      [Yy]*)
-          sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh)
+          sudo su - && sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/install.sh) && exit    
           break
           ;;
      [Nn]*) break ;;
@@ -149,8 +145,14 @@ while true; do
      [Yy]*)
           chmod +x open-vpn.sh
           ./open-vpn.sh
-          sudo mv /root/thinkpad.ovpn /home/${USER}
-          sudo chown ${USER} /home/${USER}/thinkpad.ovpn
+
+          printf "\n"
+          echo "Open Vpn server configured successfully.You can download the configuration file on your home directory [thinkpad.ovpn]"
+          printf "\n"
+          break
+
+          sudo mv /root/${USER}.ovpn /home/${USER}
+          sudo chown ${USER} /home/${USER}/${USER}.ovpn
           sudo sed -i "s/verb 3/verb 0/" /etc/openvpn/server/server.conf
           sudo systemctl restart openvpn-server@server.service
 
