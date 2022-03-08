@@ -55,6 +55,8 @@ sudo cp /opt/ModSecurity/modsecurity.conf-recommended /etc/nginx/modsec/modsecur
 #change SecRule from Detection Only to ON (Important)
 sudo sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/nginx/modsec/modsecurity.conf
 
+#SecRule ARGS:scope "@contains https://www.googleapis.com/auth/userinfo.profile" "id:'9000000',phase:2,t:none,t:lowercase,pass,nolog,ctl:ruleRemoveById=930120"
+
 #create main config file
 sudo sh -c 'echo Include /etc/nginx/modsec/modsecurity.conf >> /etc/nginx/modsec/main.conf'
 sudo sh -c 'echo Include /usr/local/modsecurity-crs/crs-setup.conf >> /etc/nginx/modsec/main.conf'
