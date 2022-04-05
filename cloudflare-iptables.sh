@@ -16,8 +16,8 @@ for i in $(curl https://www.cloudflare.com/ips-v6); do sudo ip6tables -I INPUT -
 sudo iptables -A INPUT -p tcp -m multiport --dports http,https -j DROP
 sudo ip6tables -A INPUT -p tcp -m multiport --dports http,https -j DROP
 
-for i in `curl https://www.cloudflare.com/ips-v4`; do sudo iptables -I DOCKER-USER -p tcp -m multiport --dports http,https -s $i -j ACCEPT; done
-for i in `curl https://www.cloudflare.com/ips-v6`; do sudo ip6tables -I DOCKER-USER -p tcp -m multiport --dports http,https -s $i -j ACCEPT; done
+# for i in `curl https://www.cloudflare.com/ips-v4`; do sudo iptables -I DOCKER-USER -p tcp -m multiport --dports http,https -s $i -j ACCEPT; done
+# for i in `curl https://www.cloudflare.com/ips-v6`; do sudo ip6tables -I DOCKER-USER -p tcp -m multiport --dports http,https -s $i -j ACCEPT; done
 
-sudo iptables -A DOCKER-USER -p tcp -m multiport --dports http,https -j DROP
-sudo ip6tables -A DOCKER-USER -p tcp -m multiport --dports http,https -j DROP
+# sudo iptables -A DOCKER-USER -p tcp -m multiport --dports http,https -j DROP
+# sudo ip6tables -A DOCKER-USER -p tcp -m multiport --dports http,https -j DROP

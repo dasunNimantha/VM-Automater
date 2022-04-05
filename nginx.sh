@@ -23,11 +23,11 @@ sudo sed -i "/server_tokens off;/a\\
 
 while true; do
     printf "\n"
-    read -r -p "Do you want to add SSL certificate via letsencrypt ? (Y/N) : " isSSL
-    case $isSSL in
+    read -r -p "Do you want to install ModSecurity WAF ? (Y/N) : " isModSec
+    case $isModSec in
     [Yy]*)
-        chmod +x certbot_nginx.sh
-        ./certbot_nginx.sh
+        chmod +x modsecurity.sh
+        sudo ./modsecurity.sh
         break
         ;;
     [Nn]*) break ;;
